@@ -1,13 +1,9 @@
 import Book from "./Book";
 import PropTypes from "prop-types";
 
-const Bookshelf = (books, shelfTitle, shelf) => {
+const Bookshelf = ({books, shelfTitle, shelf, updateBook}) => {
 
-//   let currentlyReading = books.books.filter((f) => f.shelf === "currentlyReading");
-//   let wantToRead = books.books.filter((f) => f.shelf === "wantToRead");
-//   let read = books.books.filter((f) => f.shelf === "read");
-
-    const bookShelf = books.filter((book) => book.shelf === shelf)
+const bookShelf = books.filter((book) => book.shelf === shelf)
 
     return(
 <       div className="bookshelf">
@@ -16,7 +12,9 @@ const Bookshelf = (books, shelfTitle, shelf) => {
                 <ol className="books-grid">
                 {bookShelf.map((book)=>{
                     return <Book key={book.id} 
-                    book = {book} />
+                    book = {book} 
+                    shelf = {shelf}
+                    updateBook = {updateBook}/>
                     })}
                 </ol>
             </div>
@@ -24,9 +22,9 @@ const Bookshelf = (books, shelfTitle, shelf) => {
     )
 }
 
-// Bookshelf.propTypes = {
-//     books : PropTypes.array.isRequired,
-//     shelfTitle : PropTypes.object.isRequired,
-// }
+Bookshelf.propTypes = {
+    books : PropTypes.array.isRequired,
+    shelfTitle : PropTypes.object.isRequired,
+}
 
 export default Bookshelf;

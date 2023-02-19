@@ -18,6 +18,13 @@ function App() {
     getAllBooks();
   }, []);
 
+  const updateBook = async (book, shelf) => {
+    await BooksAPI.update(book, shelf);
+    const result = await BooksAPI.getAll();
+    setBooks(result);
+  }
+
+  
   return (
     <div className="App">
       <Routes>
@@ -26,6 +33,7 @@ function App() {
           path="/"
           element={
             <BooksList books={books}
+            updateBook = {updateBook}
             />
           }
         />

@@ -3,24 +3,27 @@ import Bookshelf from "./BookShelf";
 import PropTypes from "prop-types";
 
 //This method will take in Books as Props
-const BooksList = (books) => {
+const BooksList = ({books, updateBook}) => {
 
 return (
 <div className="list-books">
             <Bookshelf 
               books={books} 
               shelfTitle="Currently Reading"
-              shelf="currentlyReading">
+              shelf="currentlyReading"
+              updateBook = {updateBook}>
             </Bookshelf>
             <Bookshelf 
               books={books} 
               shelfTitle="Want To Read"
-              shelf="wantToRead">
+              shelf="wantToRead"
+              updateBook = {updateBook}>
             </Bookshelf>
             <Bookshelf 
               books={books} 
               shelfTitle="Read"
-              shelf="read">
+              shelf="read"
+              updateBook = {updateBook}>
             </Bookshelf>
           <div className="open-search">
             <Link to="/search" className="search-books">

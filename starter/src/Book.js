@@ -1,31 +1,51 @@
 //Book View
 import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
 
-const Books = (books) => {
+const Books = ( {book, shelf, updateBook} ) => {
+
+	const [currentShelf, setCurrentShelf] = useState(shelf);
+	const [hasValueUpdated, setUpdatedValue] = useState(false);
+    
+	const changeBookShelf = (event) => {
+		setCurrentShelf(event.target.value);
+		setUpdatedValue(true);
+	}
+
+	useEffect(() => {
+		if(hasValueUpdated){
+			updateBook(book, currentShelf)
+		}
+	  }, [book, currentShelf]);
+
 
     return (
-        <div>
-            {console.log(books.book)};
+
+        <div className="book">
+			<div className="book-top">
+				<div
+					className="book-cover"
+					style={{
+						width: 128,
+						height: 188,
+						backgroundImage: 
+                        `url(${book.imageLinks.smallThumbnail})`,
+					}}></div>
+					<div className="book-shelf-changer">
+					<select value={shelf} onChange={changeBookShelf}>
+                          <option value="none" disabled> Move to...</option>
+                          <option value="currentlyReading">Currently Reading</option>
+                          <option value="wantToRead">Want to Read</option>
+                          <option value="read">Read</option>
+                          <option value="none">None</option>
+                        </select>
+					</div>
+			</div>         
+            <div className="book-title">{book.title}</div>
+            <div className="book-authors">{book.authors && book.authors.join(", ")}</div> 
         </div>
-        // <div className="book">
-        //     <div className="book-top"
-        //         <div
-        //             className="book-cover"
-        //             style={{
-        //                 width: 128,
-        //                 height: 193,
-        //                 backgroundImage:
-        //                 `url(${books.imageLinks.smallThumbnail})`,
-        //             }}
-        //         ></div>
-        //         <div className="book-shelf-changer">
-        //         </div>
-        //     </div>
-        //     <div className="book-title">{books.title}</div>
-        //     <div className="book-authors">{books.authors}</div>
-        // </div>
-    )
-}
+    );
+};
 
 Books.propTypes = {
     books: PropTypes.array.isRequired,
