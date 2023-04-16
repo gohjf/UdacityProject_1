@@ -20,10 +20,8 @@ function App() {
 
   const updateBook = async (book, shelf) => {
     await BooksAPI.update(book, shelf);
-    const result = await BooksAPI.getAll();
-    setBooks(result);
+    getAllBooks();
   }
-
   
   return (
     <div className="App">
@@ -40,7 +38,9 @@ function App() {
         <Route
           path="/search"
           element={
-            <SearchList />
+            <SearchList 
+            updateBook = {updateBook}
+            />
           }
         />
     </Routes>

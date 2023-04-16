@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "./BooksAPI.js";
+import Books from "./Book.js";
 
-const SearchList = ({Query}) => {
+const SearchList = ({updateBook}) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [listBook, setListBook] = useState([]);
 
   const updateQuery = (searchQuery) => {
-    setSearchQuery(searchQuery.trim());
+    setSearchQuery(searchQuery);
   };
 
   const getSearchResult  = async (searchQuery) => {
@@ -49,38 +50,13 @@ const SearchList = ({Query}) => {
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-            {listBook.map((bookList) => (
-                <li>
-                  <div className="book">
-                    <div className="book-top">
-                      <div
-                        className="book-cover"
-                        style={{
-                          width: 128,
-                          height: 193,
-                          backgroundImage: `url(${bookList.imageLinks.smallThumbnail})`,
-                        }}
-                      ></div>
-                      <div className="book-shelf-changer">
-                        <select>
-                          <option value="none" disabled>
-                            Move to...
-                          </option>
-                          <option value="currentlyReading">
-                            Currently Reading
-                          </option>
-                          <option value="wantToRead">Want to Read</option>
-                          <option value="read">Read</option>
-                          <option value="none">None</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="book-title">{bookList.title}</div>
-                    <div className="book-authors">{bookList.authors}</div>
-                  </div>
-                </li>
-              ))
-            }
+            {listBook.map((book)=>{
+                    return <Books 
+                    key={book.id} 
+                    book = {book} 
+                    shelf = {book.shelf}
+                    updateBook = {updateBook}/>
+                    })}
             </ol>
           </div>
         </div>
