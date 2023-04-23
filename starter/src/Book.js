@@ -29,7 +29,7 @@ const Books = ( {book, shelf, updateBook} ) => {
 						width: 128,
 						height: 188,
 						backgroundImage: 
-                        `url(${book.imageLinks.smallThumbnail})`,
+                        `url(${book.imageLinks ? book.imageLinks.smallThumbnail : ""})`,
 					}}></div>
 					<div className="book-shelf-changer">
 					<select value={shelf} onChange={changeBookShelf}>

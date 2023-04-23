@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import * as BooksAPI from "./BooksAPI.js";
 import Books from "./Book.js";
 
-const SearchList = ({updateBook}) => {
+const SearchList = ({books, updateBook}) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [listBook, setListBook] = useState([]);
 
@@ -19,7 +19,17 @@ const SearchList = ({updateBook}) => {
           setListBook([]);
       }
       else{
-        setListBook(result); 
+
+      const filteredResult = result.map((book) => {
+        books.map((books) => {
+          if(books.id === book.id){
+            book.shelf = books.shelf
+          }
+          return books;
+        })
+        return book;
+      })
+        setListBook(filteredResult); 
       } 
     }
   }
@@ -54,7 +64,7 @@ const SearchList = ({updateBook}) => {
                     return <Books 
                     key={book.id} 
                     book = {book} 
-                    shelf = {book.shelf}
+                    shelf = {book.shelf ? book.shelf : "none"}
                     updateBook = {updateBook}/>
                     })}
             </ol>
