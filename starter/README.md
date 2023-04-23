@@ -32,6 +32,10 @@ To get started developing right away:
     │   └── arrow-drop-down.svg
     ├── index.css # Global styles. You probably won't need to change anything here.
     └── index.js # You should not need to modify this file. It is used for DOM rendering only.
+    └── Book.js #This is the view for the book. It is used when rendering the bookshelf books and also search results
+    └── BookList.js #This is a list of books for each bookshelf
+    └── BookShelf.js #This is the view for each category of the bookshelf
+    └── SearchList.js #This is the view for search
 ```
 
 Remember that good React design practice is to create new JS files for each component and use import/require statements to include them where they are needed.
